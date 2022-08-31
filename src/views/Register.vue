@@ -33,7 +33,38 @@
   </div>
 </template>
 
-<script></script>
+<script>
+// import firebase from "firebase";
+import axios from "axios";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    gotoregister() {
+      axios({
+        method: "post",
+        url: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDgctRRmWxeGm9SBIw2o4DKiH498CW-PYw",
+        data: {
+          email: this.email,
+          password: this.password,
+          returnSecureToken: true,
+        },
+      })
+        .then((response) => {
+          console.log(response);
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+};
+</script>
 
 <style scoped>
 .register {

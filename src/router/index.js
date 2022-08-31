@@ -28,4 +28,15 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const authenticateduser = localStorage.getItem("user");
+  const requireauth = to.matched.some((record) => record.meta.requireauth);
+
+  if (requireauth && !authenticateduser) {
+    next("/");
+  } else {
+    next();
+  }
+});
+
 export default router;

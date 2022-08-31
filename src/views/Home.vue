@@ -37,6 +37,7 @@
 
 <script>
 import axios from "axios";
+import Cookies from "js-cookie";
 export default {
   data() {
     return {
@@ -49,7 +50,6 @@ export default {
       if (
         this.email == "" ||
         this.password == "" ||
-        this.password.length != 6 ||
         !this.email.includes("@") ||
         !this.email.includes("gmail.com")
       ) {
@@ -63,13 +63,24 @@ export default {
           password: this.password,
           returnSecureToken: true,
         },
-      }).then((response) => {
-        console.log(response.data.idToken);
-        localStorage.setItem("token", response.data.idToken);
-        console.log(response.data.refreshToken);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-        this.$router.push("/dashboard");
-      });
+      })
+        .then((response) => {
+          console.log(response.data);
+          Cookies.set("token", response.data.idToken);
+          console.log(response.data.refreshToken);
+          Cookies.set("refreshToken", response.data.refreshToken);
+          Cookies.set("user", response.data.email);
+          console.log(response.data.email);
+          this.$store.commit("setauth", {
+            token: response.data.idToken,
+            refreshToken: response.data.refreshToken,
+            user: response.data.email,
+          });
+          this.$router.push("/dashboard");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
