@@ -45,22 +45,31 @@ export default {
   },
   methods: {
     gotoregister() {
-      axios({
-        method: "post",
-        url: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDgctRRmWxeGm9SBIw2o4DKiH498CW-PYw",
-        data: {
-          email: this.email,
-          password: this.password,
-          returnSecureToken: true,
-        },
-      })
-        .then((response) => {
-          console.log(response);
-          this.$router.push("/");
+      if (
+        this.email == "" ||
+        this.password == "" ||
+        !this.email.includes("@") ||
+        !this.email.includes("gmail.com")
+      ) {
+        alert("Please fill all the fields properly");
+      } else {
+        axios({
+          method: "post",
+          url: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDgctRRmWxeGm9SBIw2o4DKiH498CW-PYw",
+          data: {
+            email: this.email,
+            password: this.password,
+            returnSecureToken: true,
+          },
         })
-        .catch((error) => {
-          console.log(error);
-        });
+          .then((response) => {
+            console.log(response);
+            this.$router.push("/");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
   },
 };

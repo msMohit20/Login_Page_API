@@ -54,33 +54,34 @@ export default {
         !this.email.includes("gmail.com")
       ) {
         alert("Please fill all the fields properly");
-      }
-      axios({
-        method: "post",
-        url: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDgctRRmWxeGm9SBIw2o4DKiH498CW-PYw",
-        data: {
-          email: this.email,
-          password: this.password,
-          returnSecureToken: true,
-        },
-      })
-        .then((response) => {
-          console.log(response.data);
-          Cookies.set("token", response.data.idToken);
-          console.log(response.data.refreshToken);
-          Cookies.set("refreshToken", response.data.refreshToken);
-          Cookies.set("user", response.data.email);
-          console.log(response.data.email);
-          this.$store.commit("setauth", {
-            token: response.data.idToken,
-            refreshToken: response.data.refreshToken,
-            user: response.data.email,
-          });
-          this.$router.push("/dashboard");
+      } else {
+        axios({
+          method: "post",
+          url: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDgctRRmWxeGm9SBIw2o4DKiH498CW-PYw",
+          data: {
+            email: this.email,
+            password: this.password,
+            returnSecureToken: true,
+          },
         })
-        .catch((error) => {
-          console.log(error);
-        });
+          .then((response) => {
+            console.log(response.data);
+            Cookies.set("token", response.data.idToken);
+            console.log(response.data.refreshToken);
+            Cookies.set("refreshToken", response.data.refreshToken);
+            Cookies.set("user", response.data.email);
+            console.log(response.data.email);
+            this.$store.commit("setauth", {
+              token: response.data.idToken,
+              refreshToken: response.data.refreshToken,
+              user: response.data.email,
+            });
+            this.$router.push("/dashboard");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
   },
 };
