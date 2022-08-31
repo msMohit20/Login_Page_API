@@ -51,7 +51,11 @@ export default {
         this.email == "" ||
         this.password == "" ||
         !this.email.includes("@") ||
-        !this.email.includes("gmail.com")
+        !this.email.includes(".com") ||
+        this.password.length != 8 ||
+        !this.password.includes(
+          "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
+        )
       ) {
         alert("Please fill all the fields properly");
       } else {
