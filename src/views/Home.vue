@@ -54,7 +54,8 @@ export default {
         this.email == "" ||
         this.password == "" ||
         !this.email.includes("@") ||
-        !this.email.includes(".com")
+        !this.email.includes(".com") ||
+        !this.password.length > 10
       ) {
         alert("Please fill fields properly !");
       } else {
@@ -89,6 +90,7 @@ export default {
     },
     pollData() {
       if (this.$store.getters.isAuth) {
+        console.log("polling");
         this.polling = setInterval(() => {
           this.$store.dispatch("refreshtoken");
         }, 3000);

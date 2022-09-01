@@ -1,7 +1,7 @@
 <template>
   <div class="register">
     <div class="form">
-      <h2>Login Form</h2>
+      <h2>Registration Form</h2>
       <form @submit.prevent="gotoregister">
         <div class="form-group">
           <label class="label">Email address</label>
@@ -49,7 +49,8 @@ export default {
         this.email == "" ||
         this.password == "" ||
         !this.email.includes("@") ||
-        !this.email.includes(".com")
+        !this.email.includes(".com") ||
+        !this.password.length > 10
       ) {
         alert("Please fill all the fields properly");
       } else {
@@ -65,7 +66,7 @@ export default {
           // alert("Registered Successfully");
           // this.$router.push("/");
 
-          if (res) {
+          if (res.data.registered == true) {
             alert("Email Already Exist");
           } else {
             axios({
