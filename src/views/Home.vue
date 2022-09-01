@@ -44,6 +44,7 @@ export default {
       email: "",
       password: "",
       polling: null,
+      isauthenticated: false,
     };
   },
 
@@ -69,15 +70,16 @@ export default {
           .then((response) => {
             console.log(response.data);
             Cookies.set("token", response.data.idToken);
-            console.log(response.data.refreshToken);
+            // console.log(response.data.refreshToken);
             Cookies.set("refreshToken", response.data.refreshToken);
             Cookies.set("user", response.data.email);
-            console.log(response.data.email);
+            // console.log(response.data.email);
             this.$store.commit("setauth", {
               token: response.data.idToken,
               refreshToken: response.data.refreshToken,
               user: response.data.email,
             });
+            // this.$router.dispatch("isAuth", this.isauthenticated);
             this.$router.push("/dashboard");
           })
           .catch((error) => {
@@ -86,9 +88,13 @@ export default {
       }
     },
     pollData() {
-      this.polling = setInterval(() => {
-        this.$store.dispatch("refreshtoken");
-      }, 1000);
+      if (this.$store.getters.isAuth) {
+        this.polling = setInterval(() => {
+          this.$store.dispatch("refreshtoken");
+        }, 3000);
+      } else {
+        clearInterval(this.polling);
+      }
     },
   },
   beforeDestroy() {

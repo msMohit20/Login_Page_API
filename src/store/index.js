@@ -10,12 +10,20 @@ export default new Vuex.Store({
     token: Cookies.get("token") || "",
     refreshToken: Cookies.get("refreshToken") || "",
     user: Cookies.get("user") || "",
+    auth: false,
   },
   mutations: {
     setauth(state, payload) {
       state.token = payload.token;
       state.refreshToken = payload.refreshToken;
       state.user = payload.user;
+    },
+    isAuth(state) {
+      if (state.token !== "") {
+        return (state.auth = true);
+      } else {
+        return (state.auth = false);
+      }
     },
   },
   actions: {
@@ -53,6 +61,9 @@ export default new Vuex.Store({
     username: (state) => {
       console.log(state.user);
       return state.user;
+    },
+    isAuth: (state) => {
+      return state.auth;
     },
   },
 });

@@ -55,5 +55,6 @@ export default {
   text-decoration: none;
   margin: 0px 5px 0px 5px;
   color: #2c3e50;
+  cursor: pointer;
 }
 </style>
