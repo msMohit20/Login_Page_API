@@ -19,7 +19,7 @@ export default {
         console.log("polling");
         this.polling = setInterval(() => {
           this.$store.dispatch("refreshToken");
-        }, 900000);
+        }, 3600000);
       } else {
         clearInterval(this.polling);
       }
