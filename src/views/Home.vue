@@ -2,7 +2,7 @@
   <div class="home">
     <div class="form">
       <h2>Login Form</h2>
-      <form @submit.prevent="gotologin" @click="pollData">
+      <form @submit.prevent="gotologin">
         <div class="form-group">
           <label class="label">Email address</label>
           <input
@@ -80,7 +80,7 @@ export default {
               refreshToken: response.data.refreshToken,
               user: response.data.email,
             });
-            // this.$router.dispatch("isAuth", this.isauthenticated);
+            this.$store.commit("isAuth", this.isauthenticated);
             this.$router.push("/dashboard");
           })
           .catch((error) => {
@@ -90,7 +90,7 @@ export default {
     },
     pollData() {
       if (this.$store.getters.isAuth) {
-        console.log("polling");
+        // console.log("polling");
         this.polling = setInterval(() => {
           this.$store.dispatch("refreshtoken");
         }, 3000);
