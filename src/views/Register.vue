@@ -34,7 +34,6 @@
 </template>
 
 <script>
-// import firebase from "firebase";
 import axios from "axios";
 export default {
   data() {
@@ -63,8 +62,6 @@ export default {
           },
         }).then((res) => {
           console.log(res);
-          // alert("Registered Successfully");
-          // this.$router.push("/");
 
           if (res.data.registered == true) {
             alert("Email Already Exist");
