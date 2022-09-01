@@ -27,11 +27,11 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    refreshToken({ commit, state }) {
+    refreshToken({ commit }) {
       return new Promise((resolve, reject) => {
         const data = {
           grant_type: "refresh_token",
-          refresh_token: state.refreshToken,
+          refresh_token: Cookies.get("refreshToken"),
         };
         axios
           .post(
@@ -39,11 +39,11 @@ export default new Vuex.Store({
             data
           )
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             Cookies.set("token", response.data.idToken);
-            console.log(response.data.refreshToken);
+            // console.log(response.data.refreshToken);
             Cookies.set("refreshToken", response.data.refreshToken);
-            console.log(response.data.user);
+            // console.log(response.data.user);
             Cookies.set("user", response.data.user);
             commit("setauth", response.data);
           })

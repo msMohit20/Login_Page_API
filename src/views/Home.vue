@@ -43,7 +43,7 @@ export default {
     return {
       email: "",
       password: "",
-      polling: null,
+      // polling: null,
       isauthenticated: false,
     };
   },
@@ -88,24 +88,24 @@ export default {
           });
       }
     },
-    pollData() {
-      console.log("polling");
-      if (this.$store.getters["isAuth"]) {
-        console.log("polling");
-        this.polling = setInterval(() => {
-          this.$store.dispatch("refreshtoken");
-        }, 3000);
-      } else {
-        clearInterval(this.polling);
-      }
-    },
+    // pollData() {
+    //   console.log("polling");
+    //   if (this.$store.getters["isAuth"]) {
+    //     console.log("polling");
+    //     this.polling = setInterval(() => {
+    //       this.$store.dispatch("refreshtoken");
+    //     }, 3000);
+    //   } else {
+    //     clearInterval(this.polling);
+    //   }
+    // },
   },
-  beforeDestroy() {
-    clearInterval(this.polling);
-  },
-  created() {
-    this.pollData();
-  },
+  // beforeDestroy() {
+  //   clearInterval(this.polling);
+  // },
+  // created() {
+  //   this.pollData();
+  // },
 };
 </script>
 
