@@ -4,3 +4,32 @@
     <p>This is the Dashboard</p>
   </div>
 </template>
+
+<script>
+// export default {
+//   data() {
+//     return {
+//       polling: null,
+//     };
+//   },
+//   methods: {
+//     pollData() {
+//       console.log("polling");
+//       if (this.$store.getters["isAuth"]) {
+//         console.log("polling");
+//         this.polling = setInterval(() => {
+//           this.$store.dispatch("refreshToken");
+//         }, 3000);
+//       } else {
+//         clearInterval(this.polling);
+//       }
+//     },
+//   },
+//   beforeDestroy() {
+//     clearInterval(this.polling);
+//   },
+//   created() {
+//     this.pollData();
+//   },
+// };
+</script>

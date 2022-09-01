@@ -89,8 +89,9 @@ export default {
       }
     },
     pollData() {
-      if (this.$store.getters.isAuth) {
-        // console.log("polling");
+      console.log("polling");
+      if (this.$store.getters["isAuth"]) {
+        console.log("polling");
         this.polling = setInterval(() => {
           this.$store.dispatch("refreshtoken");
         }, 3000);
