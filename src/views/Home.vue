@@ -2,7 +2,7 @@
   <div class="home">
     <div class="form">
       <h2>Login Form</h2>
-      <form @submit.prevent="gotologin">
+      <form @submit.prevent="gotologin" @click="pollData">
         <div class="form-group">
           <label class="label">Email address</label>
           <input

@@ -15,7 +15,7 @@ import Cookies from "js-cookie";
 export default {
   computed: {
     isLogIn() {
-      console.log(this.$store.getters["isLoggedIn"]);
+      // console.log(this.$store.getters["isLoggedIn"]);
       if (this.$store.getters["isLoggedIn"]) {
         return true;
       } else {
