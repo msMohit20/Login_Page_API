@@ -43,19 +43,19 @@ export default {
     return {
       email: "",
       password: "",
+      polling: null,
     };
   },
+
   methods: {
     gotologin() {
       if (
         this.email == "" ||
         this.password == "" ||
         !this.email.includes("@") ||
-        !this.email.includes(".com") ||
-        this.password.length > 5 ||
-        this.password.length < 11
+        !this.email.includes(".com")
       ) {
-        alert("Please fill all the fields properly");
+        alert("Please fill fields properly !");
       } else {
         axios({
           method: "post",
@@ -85,6 +85,17 @@ export default {
           });
       }
     },
+    pollData() {
+      this.polling = setInterval(() => {
+        this.$store.dispatch("refreshtoken");
+      }, 1000);
+    },
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
+  },
+  created() {
+    this.pollData();
   },
 };
 </script>

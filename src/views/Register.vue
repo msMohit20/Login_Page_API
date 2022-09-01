@@ -49,28 +49,43 @@ export default {
         this.email == "" ||
         this.password == "" ||
         !this.email.includes("@") ||
-        !this.email.includes(".com") ||
-        this.password.length > 5 ||
-        this.password.length < 11
+        !this.email.includes(".com")
       ) {
         alert("Please fill all the fields properly");
       } else {
         axios({
           method: "post",
-          url: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDgctRRmWxeGm9SBIw2o4DKiH498CW-PYw",
+          url: "https://identitytoolkit.googleapis.com/v1/accounts:createAuthUri?key=AIzaSyDgctRRmWxeGm9SBIw2o4DKiH498CW-PYw",
           data: {
-            email: this.email,
-            password: this.password,
-            returnSecureToken: true,
+            identifier: this.email,
+            continueUri: "http://localhost:8080/register",
           },
-        })
-          .then((response) => {
-            console.log(response);
-            this.$router.push("/");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        }).then((res) => {
+          console.log(res);
+          // alert("Registered Successfully");
+          // this.$router.push("/");
+
+          if (res) {
+            alert("Email Already Exist");
+          } else {
+            axios({
+              method: "post",
+              url: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDgctRRmWxeGm9SBIw2o4DKiH498CW-PYw",
+              data: {
+                email: this.email,
+                password: this.password,
+                returnSecureToken: true,
+              },
+            })
+              .then((response) => {
+                console.log(response);
+                this.$router.push("/");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
       }
     },
   },
