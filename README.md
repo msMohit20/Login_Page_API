@@ -25,7 +25,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 "# Login-Page" 
 "# Login_Page_API" 
 
-# Screenshot 
+# Screenshots 
 
 ### Home/Login Page
 ![Screenshot2](https://user-images.githubusercontent.com/69730742/193007104-8f92e306-5784-4767-8f5a-fb50f9d9bf6c.jpg)
