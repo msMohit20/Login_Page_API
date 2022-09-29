@@ -11,12 +11,15 @@ export default new Vuex.Store({
     refreshToken: Cookies.get("refreshToken") || "",
     user: Cookies.get("user") || "",
     auth: false,
+    id: Cookies.get("id") || "",
   },
   mutations: {
     setauth(state, payload) {
       state.token = payload.token;
       state.refreshToken = payload.refreshToken;
       state.user = payload.user;
+      console.log(state.id);
+      // state.id = payload.locaId;
     },
     isAuth(state) {
       if (state.token !== "") {
@@ -45,6 +48,7 @@ export default new Vuex.Store({
             Cookies.set("refreshToken", response.data.refreshToken);
             // console.log(response.data.user);
             Cookies.set("user", response.data.user);
+            Cookies.set("id", response.data.localId);
             commit("setauth", response.data);
           })
           .catch((error) => {
@@ -64,6 +68,9 @@ export default new Vuex.Store({
     },
     isAuth: (state) => {
       return state.auth;
+    },
+    localId: (state) => {
+      return state.id;
     },
   },
 });

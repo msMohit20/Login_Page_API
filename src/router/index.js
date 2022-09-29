@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-
+// import Cookies from "js-cookie";
 Vue.use(VueRouter);
 
 const routes = [
@@ -11,9 +11,16 @@ const routes = [
     component: Home,
   },
   {
-    path: "/dashboard",
+    path: "/dashboard/",
     name: "Dashboard",
     component: () => import("../views/Dashboard.vue"),
+    children: [
+      {
+        path: ":localId",
+        component: () => import("../views/Home.vue"),
+        props: true,
+      },
+    ],
   },
   {
     path: "/register",
